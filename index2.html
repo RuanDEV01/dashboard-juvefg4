@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Financeira - JuventudeFg4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8B0000;
+            /* Vinho escuro */
+            --primary-light: #A52A2A;
+            /* Vinho mais claro */
+            --secondary: #FFFFFF;
+            /* Branco */
+            --accent: #FFD700;
+            /* Dourado para detalhes */
+            --success: #2E8B57;
+            /* Verde mais suave */
+            --danger: #B22222;
+            /* Vermelho vinho */
+            --light: #FFF5F5;
+            /* Branco com leve tom rosado */
+            --dark: #330000;
+            /* Vinho muito escuro para textos */
+            --gray: #666666;
+            --shadow: rgba(139, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header - Heurística 1: Visibilidade do status */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--secondary);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+        .header-info h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .header-info p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+
+        .current-balance {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 220px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent);
+            z-index: 1;
+        }
+
+        .current-balance h3 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--gray);
+        }
+
+        .balance-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 8px 0;
+        }
+
+        /*Responsivo deepseek*/
+        :root {
+            --primary: #8B0000;
+            --primary-light: #A52A2A;
+            --secondary: #FFFFFF;
+            --accent: #FFD700;
+            --success: #2E8B57;
+            --danger: #B22222;
+            --light: #FFF5F5;
+            --dark: #330000;
+            --gray: #666666;
+            --shadow: rgba(139, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            width: 100%;
+        }
+
+        /* Header - Responsivo */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--secondary);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 15px var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            gap: 20px;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .logo-container {
+            width: 70px;
+            height: 70px;
+            background: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent);
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .header-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .header-info h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+            word-wrap: break-word;
+        }
+
+        .header-info p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .current-balance {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent);
+            flex-shrink: 0;
+        }
+
+        .current-balance h3 {
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: var(--gray);
+        }
+
+        .balance-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 8px 0;
+            word-wrap: break-word;
+        }
+
+        /* Período selecionável - Responsivo */
+        .period-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--secondary);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .period-selector span {
+            color: var(--primary);
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .period-btn {
+            padding: 10px 15px;
+            background: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        /* Dashboard Cards - Responsivo */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(139, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(139, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-footer {
+            font-size: 0.85rem;
+            color: var(--gray);
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Gráficos - Responsivo */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-top: 4px solid var(--primary);
+            overflow: hidden;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            word-wrap: break-word;
+        }
+
+        .chart-placeholder {
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--light);
+            border-radius: 10px;
+            color: var(--gray);
+            border: 2px dashed rgba(139, 0, 0, 0.2);
+            padding: 15px;
+        }
+
+        /* Transações - Responsivo */
+        .transactions-container {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+            border-top: 4px solid var(--primary);
+            overflow-x: auto;
+        }
+
+        .section-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 8px rgba(139, 0, 0, 0.2);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 10px;
+            background: var(--light);
+            color: var(--primary);
+            border-bottom: 2px solid #eee;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* Avaliação mensal */
+        .monthly-assessment {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .assessment-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.85rem;
+            border-top: 1px solid #eee;
+            margin-top: 30px;
+            background: var(--secondary);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        /* Responsividade para tablets */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 12px;
+            }
+
+            .dashboard-cards {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .charts-container {
+                gap: 15px;
+            }
+        }
+
+        /* Responsividade para tablets pequenos */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+
+            .header-info h1 {
+                font-size: 1.4rem;
+            }
+
+            .current-balance {
+                width: 100%;
+                min-width: unset;
+                margin-top: 10px;
+            }
+
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .card-value {
+                font-size: 1.6rem;
+            }
+
+            .period-selector {
+                padding: 12px;
+            }
+
+            .period-btn {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Responsividade para celulares */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .header-info h1 {
+                font-size: 1.3rem;
+            }
+
+            .header-info p {
+                font-size: 0.85rem;
+            }
+
+            .current-balance {
+                padding: 12px;
+            }
+
+            .balance-value {
+                font-size: 1.6rem;
+            }
+
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-value {
+                font-size: 1.5rem;
+            }
+
+            .chart-card {
+                padding: 15px;
+            }
+
+            .chart-title {
+                font-size: 1.1rem;
+            }
+
+            .chart-placeholder {
+                height: 180px;
+                padding: 10px;
+            }
+
+            .transactions-container {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+
+            th,
+            td {
+                padding: 8px 6px;
+                font-size: 0.85rem;
+            }
+
+            .badge {
+                padding: 4px 10px;
+                font-size: 0.75rem;
+            }
+
+            .monthly-assessment {
+                padding: 15px;
+            }
+
+            footer {
+                padding: 15px;
+                font-size: 0.8rem;
+            }
+
+            .period-selector {
+                justify-content: center;
+            }
+
+            .period-selector span {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Responsividade para celulares muito pequenos */
+        @media (max-width: 360px) {
+            .header-info h1 {
+                font-size: 1.2rem;
+            }
+
+            .balance-value {
+                font-size: 1.4rem;
+            }
+
+            .card-value {
+                font-size: 1.3rem;
+            }
+
+            .chart-placeholder {
+                height: 160px;
+            }
+
+            .btn {
+                padding: 7px 12px;
+                font-size: 0.8rem;
+            }
+
+            table {
+                min-width: 500px;
+            }
+        }
+
+        /* Ajustes para impressão */
+        @media print {
+
+            .btn,
+            .period-selector,
+            .assessment-badges {
+                display: none !important;
+            }
+
+            .card:hover {
+                transform: none;
+            }
+
+            header {
+                box-shadow: none;
+            }
+        }
+
+        /*Responsivo deepseek*/
+
+        /* Cards Dashboard - Heurística 6: Reconhecimento em vez de memorização */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 20px rgba(139, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(139, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .card-footer {
+            font-size: 0.9rem;
+            color: var(--gray);
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Gráficos - Heurística 8: Estética minimalista */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-top: 4px solid var(--primary);
+        }
+
+        .chart-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chart-placeholder {
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--light);
+            border-radius: 10px;
+            color: var(--gray);
+            border: 2px dashed rgba(139, 0, 0, 0.2);
+        }
+
+        /* Transações - Heurística 2: Correspondência com mundo real */
+        .transactions-container {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 35px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(139, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(139, 0, 0, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            background: var(--light);
+            color: var(--primary);
+            border-bottom: 2px solid #eee;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        .transaction-income {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .transaction-expense {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-income {
+            background: rgba(46, 139, 87, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(46, 139, 87, 0.3);
+        }
+
+        .badge-expense {
+            background: rgba(178, 34, 34, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(178, 34, 34, 0.3);
+        }
+
+        /* Avaliação mensal - Heurística 7: Flexibilidade e eficiência */
+        .monthly-assessment {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 35px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .assessment-badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge-good {
+            background: rgba(46, 139, 87, 0.1);
+            color: var(--success);
+            border: 2px solid var(--success);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .badge-good:hover,
+        .badge-good.active {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-regular {
+            background: rgba(255, 215, 0, 0.1);
+            color: #B8860B;
+            border: 2px solid #B8860B;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .badge-regular:hover,
+        .badge-regular.active {
+            background: #B8860B;
+            color: white;
+        }
+
+        .badge-bad {
+            background: rgba(178, 34, 34, 0.1);
+            color: var(--danger);
+            border: 2px solid var(--danger);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .badge-bad:hover,
+        .badge-bad.active {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Relatório trimestral - Heurística 10: Ajuda e documentação */
+        .quarterly-report {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 35px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+            background: var(--secondary);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        /* Heurística 9: Ajuda a recuperar de erros */
+        .help-section {
+            background: rgba(139, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 35px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .help-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Heurística 3: Controle e liberdade do usuário */
+        .period-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: var(--secondary);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .period-btn {
+            padding: 10px 18px;
+            background: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .period-btn.active,
+        .period-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .current-balance {
+                width: 100%;
+            }
+
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header - Status visível (Heurística 1) -->
+        <header>
+            <div class="logo-section">
+                <div class="logo-container">
+                    <!-- Logo do Ministério da Juventude -->
+                    <img src="img/logo_juventude.jpg" alt="logo Juventude" class="logo">
+                </div>
+                <!-- Se tiver a imagem da logo, substituir pelo código abaixo -->
+                <!-- <img src="logo-juventude.png" alt="Logo Ministério da Juventude" class="logo"> -->
+            </div>
+            <div class="header-info">
+                <h1>Dashboard Juventude fg4</h1>
+                <p>Gestão Financeira - Controle de Entradas e Saídas</p>
+                <p style="font-size: 0.85rem; margin-top: 5px;"><i class="fas fa-envelope"></i> juventudepibfg@gmail.com
+                </p>
+            </div>
+    </div>
+    <div class="current-balance">
+        <h3>SALDO NO MOMENTO</h3>
+        <div class="balance-value">R$ 210,17</div>
+        <p>Última atualização: 10/02/2026</p>
+
+
+
+    </div>
+    </header>
+
+    <!-- Período selecionável (Heurística 3) -->
+    <div class="period-selector">
+        <span style="color: var(--primary); font-weight: 600;">Período:</span>
+        <a href="index.html"><button class="period-btn">Janeiro</button></a>
+        <a href="index2.html"><button class="period-btn active">Fevereiro</button></a>
+        <button class="period-btn">Março</button>
+        <button class="period-btn">Abril</button>
+        <button class="period-btn">Maio</button>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard-cards">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Entradas do Mês</div>
+                <div class="card-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+            </div>
+            <div class="card-value" style="color: var(--success);">R$ 294,50</div>
+            <div class="card-footer">
+                <i class="fas fa-user" style="color: var(--primary);"></i> Última: A definir
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Saídas do Mês</div>
+                <div class="card-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+            </div>
+            <div class="card-value" style="color: var(--danger);">R$ 84,33</div>
+            <div class="card-footer">
+                <i class="fas fa-info-circle" style="color: var(--primary);"></i> Meteriais dos geladinhos
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Resultado Mensal</div>
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+            <div class="card-value" style="color: #2E8B57;">R$ 210,17</div>
+            <div class=" card-footer">
+                <div class="badge badge-good" onclick="setAssessment('good')">
+                <i class="fas fa-check-circle"></i> BOM
+            </div>
+                <span style="margin-left: 10px; font-size: 0.8rem;">Saldo Positivo</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Meta Mensal</div>
+                <div class="card-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+            </div>
+            <div class="card-value" style="color: var(--accent);">R$ 100,00</div>
+
+        </div>
+    </div>
+
+    <!-- Gráficos (Heurística 8) -->
+    <div class="charts-container">
+        <div class="chart-card">
+            <div class="chart-title">Entradas vs Saídas (Fev/2026)</div>
+            <div class="chart-placeholder">
+                <i class="fas fa-chart-pie"
+                    style="font-size: 3.5rem; margin-bottom: 15px; color: rgba(139, 0, 0, 0.3);"></i>
+                <p style="font-weight: 600; color: var(--primary);">Vou gerar os gráficos em breve</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; text-align: center;">
+                    Entradas: <strong style="color: var(--success);">R$ 294,50 (100%)</strong><br>
+                    Saídas: <strong style="color: var(--danger);">R$ 84,33 (28,6%)</strong>
+                </p>
+                <div
+                    style="width: 80%; height: 24px; background: #e0e0e0; border-radius: 12px; margin-top: 20px; overflow: hidden;">
+                    <div style="width: 100%; height: 100%; background: var(--success);"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="chart-title">Distribuição por Categoria</div>
+            <div class="chart-placeholder">
+                <div style="margin-top: 25px; text-align: left; width: 80%;">
+                    <div
+                        style="display: flex; align-items: center; margin-bottom: 12px; padding: 8px; background: var(--light); border-radius: 6px;">
+                        <div
+                            style="width: 15px; height: 15px; background: var(--success); margin-right: 12px; border-radius: 3px;">
+                        </div>
+                        <span><strong>Doações:</strong> R$ 00,00</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; margin-bottom: 12px; padding: 8px; background: var(--light); border-radius: 6px;">
+                        <div
+                            style="width: 15px; height: 15px; background: var(--accent); margin-right: 12px; border-radius: 3px;">
+                        </div>
+                        <span><strong>Venda de lanches:</strong> R$ 267,50</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; padding: 8px; background: var(--light); border-radius: 6px;">
+                        <div
+                            style="width: 15px; height: 15px; background: var(--primary-light); margin-right: 12px; border-radius: 3px;">
+                        </div>
+                        <span><strong>Eventos pagos:</strong> R$ 0,00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transações (Heurística 2) -->
+    <div class="transactions-container">
+        <div class="section-header">
+            <div class="section-title">Histórico de Transações</div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Saldo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td><strong>02/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">19:35</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Vendas</td>
+                    <td>
+                        <strong>Venda dos geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Leandro Prazeres Conceição</span>
+                    </td>
+                    <td class="transaction-income">R$ 10,00</td>
+                    <td><strong>R$ 36,00</strong></td>
+                </tr>
+
+                <tr>
+                    <td><strong>04/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:42</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Materiais</td>
+                    <td>
+                        <strong>Materiais para os geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Anna Clara de Souza Oliveira</span>
+                    </td>
+                    <td class="transaction-income">R$ 7,00</td>
+                    <td><strong>R$ 43,00</strong></td>
+                </tr>
+
+                <tr>
+                    <td><strong>05/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">22:26</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Materiais</td>
+                    <td>
+                        <strong>Materiais para os geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Ruan Costa de Lima</span>
+                    </td>
+                    <td class="transaction-income">R$ 20,00</td>
+                    <td><strong>R$ 63,00</strong></td>
+                </tr>
+
+                <tr>
+                    <td><strong>06/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:03</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Vendas</td>
+                    <td>
+                        <strong>Venda dos geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Leandro Prazeres Conceição</span>
+                    </td>
+                    <td class="transaction-income">R$ 5,00</td>
+                    <td><strong>R$ 68,00</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>06/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:08</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Vendas</td>
+                    <td>
+                        <strong>Venda dos geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Jamile Cristina Santos Duarte Lima</span>
+                    </td>
+                    <td class="transaction-income">R$ 20,00</td>
+                    <td><strong>R$ 88,00</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>06/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:26</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Vendas</td>
+                    <td>
+                        <strong>Venda dos geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Nathanael Damasceno de Souza</span>
+                    </td>
+                    <td class="transaction-income">R$ 6,00</td>
+                    <td><strong>R$ 94,00</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>06/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:30</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Vendas</td>
+                    <td>
+                        <strong>Venda dos geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Nicolle Kayari Damasceno de Souza</span>
+                    </td>
+                    <td class="transaction-income">R$ 6,00</td>
+                    <td><strong>R$ 100,00</strong></td>
+                </tr>
+                <td><strong>06/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:34</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Caique Cinali de Oliveira Souza</span>
+                </td>
+                <td class="transaction-income">R$ 10,00</td>
+                <td><strong>R$ 110,00</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>07/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">8:23</span>
+                    </td>
+                    <td><span class="badge badge-income">Entrada</span></td>
+                    <td>Vendas</td>
+                    <td>
+                        <strong>Venda dos geladinhos</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--gray);">Tiago Pires dos Santos</span>
+                    </td>
+                    <td class="transaction-income">R$ 7,50</td>
+                    <td><strong>R$ 117,50</strong></td>
+                </tr>
+                <td><strong>07/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">13:40</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Maely Vitória Guimaraes de Lima</span>
+                </td>
+                <td class="transaction-income">R$ 20,00</td>
+                <td><strong>R$ 137,50</strong></td>
+                </tr>
+                <td><strong>07/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">14:02</span>
+                </td>
+                <td><span class="badge badge-expense">
+                        Saída
+                    </span></td>
+                <td>Materiais</td>
+                <td>
+                    <strong>Matériais dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);"></span>
+                </td>
+                <td class="transaction-expense">R$ 27,33</td>
+                <td><strong>R$ 110,17</strong></td>
+                </tr>
+                <td><strong>07/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">14:07</span>
+                </td>
+                <td><span class="badge badge-expense">
+                        Saída
+                    </span></td>
+                <td>Materiais</td>
+                <td>
+                    <strong>Matériais dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);"></span>
+                </td>
+                <td class="transaction-expense">R$ 16,00</td>
+                <td><strong>R$ 94,17</strong></td>
+                </tr>
+                <td><strong>07/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">14:14</span>
+                </td>
+                <td><span class="badge badge-expense">
+                        Saída
+                    </span></td>
+                <td>Materiais</td>
+                <td>
+                    <strong>Matériais dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);"></span>
+                </td>
+                <td class="transaction-expense">R$ 19,80</td>
+                <td><strong>R$ 74,37</strong></td>
+                </tr>
+                <td><strong>07/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">15:32</span>
+                </td>
+                <td><span class="badge badge-expense">
+                        Saída
+                    </span></td>
+                <td>Materiais</td>
+                <td>
+                    <strong>Matériais dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);"></span>
+                </td>
+                <td class="transaction-expense">R$ 21,20</td>
+                <td><strong>R$ 53,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:07</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Liane Souza Guimaraes de Lima</span>
+                </td>
+                <td class="transaction-income">R$ 10,00</td>
+                <td><strong>R$ 63,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:07</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Luiz Gustavo Bispo Rodrigues</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 65,67</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:12</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Carine Salgueiro de Cerqueira Santos</span>
+                </td>
+                <td class="transaction-income">R$ 17,50</td>
+                <td><strong>R$ 83,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:15</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Esther Silva Pina</span>
+                </td>
+                <td class="transaction-income">R$ 5,00</td>
+                <td><strong>R$ 88,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:16</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Caio Cinali de Oliveira Souza</span>
+                </td>
+                <td class="transaction-income">R$ 22,50</td>
+                <td><strong>R$ 110,67</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:18</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Caio Cinali de Oliveira Souza</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 113,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">11:00</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Jonathan Guimarães Santiago Ferreira</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 115,67</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">11:04</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Natanhael Damasceno de Souza</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 118,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">11:46</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Carine Salgueiro de Cerqueira Santos</span>
+                </td>
+                <td class="transaction-income">R$ 10,50</td>
+                <td><strong>R$ 128,67</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">12:17</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Tatiane Larissa de Jesus Ramos</span>
+                </td>
+                <td class="transaction-income">R$ 5,00</td>
+                <td><strong>R$ 133,67</strong></td>
+                </tr>
+
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">12:17</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Tatiane Larissa de Jesus Ramos</span>
+                </td>
+                <td class="transaction-income">R$ 5,00</td>
+                <td><strong>R$ 138,67 </strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:55</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Marcela Cerqueira de Lima</span>
+                </td>
+                <td class="transaction-income">R$ 12,50</td>
+                <td><strong>R$ 151,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:56</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Caique Cinali de Oliveira Souza</span>
+                </td>
+                <td class="transaction-income">R$ 7,50</td>
+                <td><strong>R$ 158,67</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:58</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Carlos  Alberto da Cruz Pimentel</span>
+                </td>
+                <td class="transaction-income">R$ 8,50</td>
+                <td><strong>R$ 167,17</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">20:59</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Brenner Batista Oliveira</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 169,67</strong></td>
+                </tr>
+                <td><strong>08/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">21:11</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Naiara Bispo de Jesus</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 171,67</strong></td>
+                </tr>
+                    <td><strong>09/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:04</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Célia da Conceição Bispo Rodrigues</span>
+                </td>
+                <td class="transaction-income">R$ 5,00</td>
+                <td><strong>R$ 176,67</strong></td>
+                </tr>
+                <td><strong>09/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">11:42</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Evelyn de Souza Oliveira</span>
+                </td>
+                <td class="transaction-income">R$ 2,50</td>
+                <td><strong>R$ 179,17</strong></td>
+                </tr>
+                <td><strong>09/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">14:44</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Neryvaldo Lima</span>
+                </td>
+                <td class="transaction-income">R$ 6,00</td>
+                <td><strong>R$ 185,17</strong></td>
+                </tr>
+                <td><strong>09/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">19:06</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Josenir do Nascimento Santana</span>
+                </td>
+                <td class="transaction-income">R$ 20,00</td>
+                <td><strong>R$ 205,17</strong></td>
+                </tr>
+                <td><strong>10/02/2026</strong><br><span style="font-size: 0.8rem; color: var(--gray);">10:26</span>
+                </td>
+                <td><span class="badge badge-income">Entrada</span></td>
+                <td>Vendas</td>
+                <td>
+                    <strong>Venda dos geladinhos</strong><br>
+                    <span style="font-size: 0.85rem; color: var(--gray);">Izidia Paiva da Conceição</span>
+                </td>
+                <td class="transaction-income">R$ 5,00</td>
+                <td><strong>R$ 210,17</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Avaliação Mensal (Heurística 7) -->
+    <div class="monthly-assessment">
+        <div class="section-header">
+            <div class="section-title">Avaliação do Mês - Fevereiro/2026</div>
+            <div>
+
+                <span style="margin-left: 10px; font-size: 0.9rem; color: var(--gray);">Avaliação atual:</span>
+                <div class="badge badge-good" onclick="setAssessment('good')">
+                <i class="fas fa-check-circle"></i> BOM
+            </div>
+            </div>
+        </div>
+
+
+
+        <div class="assessment-badges">
+
+
+
+            <div style="margin-top: 20px;">
+                <h3 style="font-weight: 600; color: var(--primary); display: block; margin-bottom: 8px;">
+                    <i class="fas fa-edit"></i> Observações do mês:
+                </h3>
+                <p style="font-weight: 600; color: var(--primary); display: block; margin-bottom: 8px;">O mês de fevereiro de 2026 apresentou um desempenho excepcional, superando a meta estabelecida de R$ 100,00 em mais de 110%. O principal motor do crescimento foi a venda de geladinhos, que gerou uma receita bruta de R$ 267,50, demonstrando uma excelente aceitação do produto. As despesas com materiais totalizaram R$ 84,33, resultando em uma margem de lucro saudável de aproximadamente 71% sobre as vendas. Recomenda-se manter o controle rigoroso dos custos de insumos para garantir a continuidade desses resultados positivos nos próximos períodos.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <div style="margin-bottom: 15px;">
+            <div style="width: 50px; height: 3px; background: var(--primary); margin: 0 auto 15px;"></div>
+            <h3 style="color: var(--primary);">JuventudeFg4</h3>
+            <p>Sistema de Gestão Financeira</p>
+        </div>
+        <p>Desenvolvido para organizar as entradas e saidas da JuventudeFg4 | Última atualização: Fevereiro de 2026</p>
+
+    </footer>
+    </div>
+
+    <script>
+        // Funções para interatividade básica
+        function setAssessment(type) {
+            const badges = document.querySelectorAll('.assessment-badges .badge');
+            badges.forEach(badge => {
+                badge.classList.remove('active');
+            });
+
+            event.target.classList.add('active');
+
+            // Atualizar no card de resultado
+            const resultCard = document.querySelector('.dashboard-cards .card:nth-child(3) .card-footer .badge');
+            const resultText = document.querySelector('.dashboard-cards .card:nth-child(3) .card-footer span:nth-child(2)');
+
+            if (type === 'good') {
+                resultCard.className = 'badge badge-good active';
+                resultCard.innerHTML = '✅ BOM';
+                resultCard.parentElement.querySelector('span:nth-child(2)').textContent = ' Saldo positivo';
+            } else if (type === 'regular') {
+                resultCard.className = 'badge badge-regular active';
+                resultCard.innerHTML = '➖ REGULAR';
+                resultCard.parentElement.querySelector('span:nth-child(2)').textContent = ' Avaliação média';
+            } else {
+                resultCard.className = 'badge badge-bad active';
+                resultCard.innerHTML = '❌ RUIM';
+                resultCard.parentElement.querySelector('span:nth-child(2)').textContent = ' Precisa melhorar';
+            }
+        }
+
+        function addTransaction() {
+            alert("Funcionalidade para adicionar nova transação.\n\nNa próxima versão, você poderá:\n1. Registrar venda de lanches\n2. Adicionar despesas de eventos\n3. Incluir doações recebidas\n4. Anexar comprovantes");
+        }
+
+        function setMonthlyGoal() {
+            const goal = prompt("Defina a meta de receita para este mês (ex: 500.00):", "500.00");
+            if (goal && !isNaN(parseFloat(goal))) {
+                const goalValue = parseFloat(goal).toFixed(2);
+                document.querySelector('.dashboard-cards .card:nth-child(4) .card-value').textContent = `R$ ${goalValue}`;
+                document.querySelector('.dashboard-cards .card:nth-child(4) .card-footer').innerHTML = `
+                    <i class="fas fa-check" style="color: var(--success);"></i> 
+                    Meta definida: R$ ${goalValue}
+                `;
+            }
+        }
+
+        // Ativar botões do seletor de período
+        document.querySelectorAll('.period-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.period-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                // Atualizar título dos gráficos
+                const periodText = this.textContent;
+                document.querySelectorAll('.chart-title').forEach(title => {
+                    const originalText = title.textContent.includes('Fev/2026')
+                        ? title.textContent.replace('Fev/2026', periodText)
+                        : `${title.textContent.split('(')[0]}(${periodText})`;
+                    title.textContent = originalText;
+                });
+            });
+        });
+
+        // Adicionar efeito de digitação no saldo (opcional)
+        document.addEventListener('DOMContentLoaded', function () {
+            const balanceElement = document.querySelector('.balance-value');
+            const originalValue = balanceElement.textContent;
+            balanceElement.textContent = '';
+
+            let i = 0;
+            function typeWriter() {
+                if (i < originalValue.length) {
+                    balanceElement.textContent += originalValue.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+
+            // Iniciar efeito após 1 segundo
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+
+</html>
